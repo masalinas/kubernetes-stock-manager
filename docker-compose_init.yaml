@@ -1,0 +1,44 @@
+version: '3.7'
+
+services:
+
+  db-keycloak:
+    image: mysql:latest
+    container_name: db-keycloak
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: underground
+      MYSQL_DATABASE: keycloak  
+    ports:
+      - 3307:3306
+      
+  db-backend:
+    image: mysql:latest
+    container_name: db-backend
+    restart: always
+    volumes:
+      - ./mysql-backend/dump:/docker-entrypoint-initdb.d
+    environment:
+      MYSQL_ROOT_PASSWORD: underground
+      MYSQL_DATABASE: training  
+    ports:
+      - 3306:3306      
+      
+  keycloak:
+    image: jboss/keycloak
+    container_name: keycloak
+    restart: always
+    volumes:
+      - ./keycloak/realm-export.json:/tmp/realm-export.json
+    environment:      
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: password
+      KEYCLOAK_IMPORT: /tmp/realm-export.json  
+      DB_VENDOR: mysql
+      DB_ADDR: db-keycloak
+      DB_PORT: 3306
+      DB_DATABASE: keycloak
+      DB_USER: root
+      DB_PASSWORD: underground
+    ports:
+      - 8081:8080    

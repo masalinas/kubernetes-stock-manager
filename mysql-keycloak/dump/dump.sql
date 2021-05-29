@@ -1836,7 +1836,7 @@ CREATE TABLE `REDIRECT_URIS` (
 
 LOCK TABLES `REDIRECT_URIS` WRITE;
 /*!40000 ALTER TABLE `REDIRECT_URIS` DISABLE KEYS */;
-INSERT INTO `REDIRECT_URIS` VALUES ('3538b8a7-c81d-4ec9-8741-202db96b1a2f','/realms/master/account/*'),('908aac02-ff05-4323-8868-ac055ff4fc49','http://localhost:8081/*'),('95b34f61-3dc8-43ff-b304-b07690a45b6f','/realms/stock-manager/account/*'),('b45787d7-41bc-4fb7-98ed-e1e6bff85ef9','/admin/stock-manager/console/*'),('e5918595-c567-4a69-bfd1-0ac9393a561c','/realms/stock-manager/account/*'),('e89cb647-9ac1-4636-8c3a-9e5523c27fda','/realms/master/account/*'),('ef50b7ea-73db-4f62-83fe-f8ab137c1714','/admin/master/console/*');
+INSERT INTO `REDIRECT_URIS` VALUES ('3538b8a7-c81d-4ec9-8741-202db96b1a2f','/realms/master/account/*'),('908aac02-ff05-4323-8868-ac055ff4fc49','http://localhost:4200/*'),('908aac02-ff05-4323-8868-ac055ff4fc49','http://localhost:8081/*'),('95b34f61-3dc8-43ff-b304-b07690a45b6f','/realms/stock-manager/account/*'),('b45787d7-41bc-4fb7-98ed-e1e6bff85ef9','/admin/stock-manager/console/*'),('e5918595-c567-4a69-bfd1-0ac9393a561c','/realms/stock-manager/account/*'),('e89cb647-9ac1-4636-8c3a-9e5523c27fda','/realms/master/account/*'),('ef50b7ea-73db-4f62-83fe-f8ab137c1714','/admin/master/console/*');
 /*!40000 ALTER TABLE `REDIRECT_URIS` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -2650,7 +2650,7 @@ CREATE TABLE `WEB_ORIGINS` (
 
 LOCK TABLES `WEB_ORIGINS` WRITE;
 /*!40000 ALTER TABLE `WEB_ORIGINS` DISABLE KEYS */;
-INSERT INTO `WEB_ORIGINS` VALUES ('b45787d7-41bc-4fb7-98ed-e1e6bff85ef9','+'),('ef50b7ea-73db-4f62-83fe-f8ab137c1714','+');
+INSERT INTO `WEB_ORIGINS` VALUES ('908aac02-ff05-4323-8868-ac055ff4fc49','*'),('b45787d7-41bc-4fb7-98ed-e1e6bff85ef9','+'),('ef50b7ea-73db-4f62-83fe-f8ab137c1714','+');
 /*!40000 ALTER TABLE `WEB_ORIGINS` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -2663,4 +2663,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-05-29 18:30:32
+-- Dump completed on 2021-05-29 23:24:30

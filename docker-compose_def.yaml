@@ -1,40 +1,38 @@
 version: '3.7'
-
 services:
-
   db-keycloak:
     image: mysql:latest
     container_name: db-keycloak
     restart: always
     volumes:
-      - ./mysql-keycloak/dump:/docker-entrypoint-initdb.d    
+      - ./mysql-keycloak/dump:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: underground
-      MYSQL_DATABASE: keycloak  
+      MYSQL_DATABASE: keycloak
     ports:
       - 3307:3306
     networks:
       - stock-manager_net
-        
+
   db-backend:
     image: mysql:latest
     container_name: db-backend
     restart: always
     volumes:
-      - ./mysql-backend/dump:/docker-entrypoint-initdb.d      
+      - ./mysql-backend/dump:/docker-entrypoint-initdb.d
     environment:
       MYSQL_ROOT_PASSWORD: underground
-      MYSQL_DATABASE: training  
+      MYSQL_DATABASE: training
     ports:
-      - 3306:3306      
+      - 3308:3306
     networks:
       - stock-manager_net
-        
+
   keycloak:
     image: jboss/keycloak
     container_name: keycloak
     restart: always
-    environment:      
+    environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: password
       DB_VENDOR: mysql
@@ -44,11 +42,28 @@ services:
       DB_USER: root
       DB_PASSWORD: underground
     ports:
-      - 8081:8080
+      - 8080:8080
     networks:
       - stock-manager_net
-            
+
+  spring-stock-manager:
+    build: ../spring-stock-manager
+    image: spring-stock-manager:latest
+    container_name: spring-stock-manager
+    restart: on-failure
+    depends_on:
+      - db-backend
+      - keycloak
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db-backend:3306/training?autoReconnect=true&allowPublicKeyRetrieval=true&useSSL=false
+      KEYCLOAK_AUTH-SERVER-URL: http://192.168.1.55:8080/auth
+      HOST_SWAGGER: 192.168.1.55
+    ports:
+      - 8081:8081
+    networks:
+      - stock-manager_net
+
 networks:
   stock-manager_net:
     name: stock-manager_net
-    driver: bridge      
+    driver: bridge

@@ -64,6 +64,18 @@ services:
     networks:
       - stock-manager_net
 
+  angular-stock-manager:
+    build: ../angular-stock-manager
+    image: angular-stock-manager:latest
+    container_name: angular-stock-manager
+    restart: on-failure
+    depends_on:
+      - spring-stock-manager
+    ports:
+      - 4200:80
+    networks:
+      - stock-manager_net
+
 networks:
   stock-manager_net:
     name: stock-manager_net
